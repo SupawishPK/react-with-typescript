@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import AddToList from "./components/AddToList";
+import List from "./components/List";
+
+export interface Istate {
+  player: {
+    name: string;
+    age: string;
+    position: string;
+    url: string;
+    note?: string;
+  }[];
+}
 
 function App() {
+  const [player, setPlayer] = useState<Istate["player"]>([
+    {
+      name: "Ronaldo",
+      age: "35",
+      position: "FW",
+      url: "https://avatars.githubusercontent.com/u/50352586?v=4",
+      note: "This is note"
+    },
+  ]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Best Football Player</h1>
+      <List player={player} />
+      <AddToList player={player} setPlayer={setPlayer}/>
     </div>
   );
 }
